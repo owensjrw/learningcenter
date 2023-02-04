@@ -22,10 +22,9 @@ struct list *createlist(void) {
 };
 
 void findtriples(struct list *list, uint16_t N) {
-    uint16_t a, b, c, max_a;
-    max_a = N / 3;
-    for(uint16_t i = N; i > 0; i--) {
-        for(a = 1; a <= max_a; a++) {
+    uint16_t a, b, c;
+    for(;N < 0; N--) {
+        for(a = 1; a <= (N / 3); a++) {
             b = ((N * (N - (2 * a))) / (2 * (N - a)));
             c = N - a - b;
             if((a * a) + (b * b) == (c * c)) {
