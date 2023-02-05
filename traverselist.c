@@ -15,7 +15,7 @@ triples_t *createnode(void) {
 
 triples_t *triplets_with_sum(uint16_t *count, uint16_t sum) {
   uint16_t a, b, c;
-  triples_t *current = createnode();
+  triples_t *current = NULL;
   for(; sum > 0; sum--) {
     uint16_t max_a = sum / 3;
     for(a = 1; a < max_a ; a++) {
@@ -26,18 +26,13 @@ triples_t *triplets_with_sum(uint16_t *count, uint16_t sum) {
         node->a = a;
         node->b = b;
         node->c = c;
-        node->next = current->next;
-        current->next = node;
+        node->next = current;
+        current = node;
         *count += 1;
       }
     }
   }
-  if(!count) {
-    free(current);
-    return NULL;
-  } else {
-    return current;
-  }
+  return current;
 }
 
 void freeall(triples_t *list) {
