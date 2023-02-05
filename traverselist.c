@@ -21,7 +21,7 @@ triples_t *triplets_with_sum(uint16_t *count, uint16_t sum) {
     for(a = 1; a < max_a ; a++) {
       b = (sum * (sum - (2 * a))) / (2 * (sum - a));
       c = sum - a - b;
-      if((a * a) + (b * b) == (c * c)) {
+      if((a * a) + (b * b) == (c * c) && (a < b)) {
         triples_t *node = createnode();
         node->a = a;
         node->b = b;
@@ -32,18 +32,19 @@ triples_t *triplets_with_sum(uint16_t *count, uint16_t sum) {
       }
     }
   }
-  return current;
+  if(!count) {
+    free(current);
+    return NULL;
+  } else {
+    return current;
+  }
 }
 
 void freeall(triples_t *list) {
-  triples_t *freed = list;
-  triples_t *next = list->next;
-  if(!freed) {
-    free(freed);
-    if(!next){
-      freed = next;
-      next = freed->next;
-    }
+  while(list) {
+    triples_t *tmp = list->next;
+    free(list);
+    list = tmp;
   }
 }
 
@@ -64,11 +65,11 @@ int main(void) {
   triples_t *first = triplets_with_sum(&count, N);
   triples_t *savefirst = first;
   printf("There are %d pythagorean triplets from 1 to %d\n", count, N);
-  for(; first->next != NULL; first = first->next) {
+  while(first) {
+    triples_t *tmp = first->next;
     printf("{a: %d, b: %d, c: %d} for %d\n", first->a, first->b, first->c, first->a + first->b + first->c);
+    first = tmp;
   }
-  first = savefirst;
-  freeall(first);
-  free(savefirst);
+  freeall(savefirst);
   return 0;
 }
