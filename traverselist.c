@@ -69,5 +69,6 @@ int main(void) {
   }
   first = savefirst;
   freeall(first);
+  free(savefirst);
   return 0;
 }
