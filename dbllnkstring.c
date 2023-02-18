@@ -45,13 +45,13 @@ void freeall(td_dblink *list) {
 
 int main(void) {
   puts("This is just practice with double linked list");
-  puts("A string is created by the linked structs therefore that is no '\\n' char");
+  puts("A string is created by the linked structs therefore that is no '\\0' char at the end of the string");
   puts("I cannot think of where this might be practical just practice with the double linkedlist datastructure");
   puts("Enter a string of any size to print in reverse.");
   td_dblink *list = createnewlist();
-  char c = 'a';
+  char c = '\0';
   while(c != '\n') {
-    scanf("%c", &c);
+    c = fgetc(stdin);
     pushchar(list, c);
   }
   puts("");
