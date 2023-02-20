@@ -3,11 +3,11 @@
 #include <stdint.h>
 #include <assert.h>
 
-define TOTALNAME 102
-define LONGPHONE 31
-define LONGEMAIL 321
-define NAMELEN 51
-define MAXSTR 256
+#define TOTALNAME 102
+#define LONGPHONE 31
+#define LONGEMAIL 321
+#define NAMELEN 51
+#define MAXSTR 256
 
 struct phones
 {
